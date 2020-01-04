@@ -1,7 +1,7 @@
 import './App.css';
 
 import React from 'react';
-import { useDispatch, useSelector, connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { increment } from './actions';
 import { decrement } from './actions';
@@ -13,9 +13,6 @@ type Props = {
 }
 
 class App extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
   render() {
     const props = this.props;
     return (
