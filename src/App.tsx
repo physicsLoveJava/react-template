@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React from 'react';
+import { useDispatch, useSelector, connect } from 'react-redux';
+
+import { increment } from './actions';
+import { decrement } from './actions';
+
+type Props = {
+  counter: number,
+  incr: () => void,
+  decr: () => void
 }
 
-export default App;
+class App extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+  render() {
+    const props = this.props;
+    return (
+      <div className="App">
+        <h1>counter {props.counter}</h1>
+        <button onClick={props.incr}>+</button>
+        <button onClick={props.decr}>-</button>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state: any) => {
+  return {
+    counter: state.counter
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    incr: () => {
+      dispatch(increment())
+    },
+    decr: () => {
+      dispatch(decrement())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
