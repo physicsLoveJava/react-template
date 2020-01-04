@@ -1,10 +1,13 @@
-import './App.css';
+import './App.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
 
 import { increment } from './actions';
 import { decrement } from './actions';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   counter: number,
@@ -16,10 +19,14 @@ class App extends React.Component<Props> {
   render() {
     const props = this.props;
     return (
-      <div className="App">
+      <div className="container">
         <h1>counter {props.counter}</h1>
-        <button onClick={props.incr}>+</button>
-        <button onClick={props.decr}>-</button>
+        <button className='btn btn-primary' onClick={props.incr}>
+          <FontAwesomeIcon icon={faPlus} />
+        </button>
+        <button className='btn btn-primary' onClick={props.decr}>
+          <FontAwesomeIcon icon={faMinus} />
+        </button>
       </div>
     );
   }
